@@ -1,0 +1,11 @@
+[project]
+name = "hw1"
+version = "0.1.0"
+description = "Project using .ipynb files for umich EECS545."
+readme = "README.md"
+requires-python = ">=3.11.1,<3.12.0"
+dependencies = [
+    "matplotlib>=3.10.0",
+    "nbdime>=4.0.2",
+    "numpy>=2.2.1",
+]
