@@ -1,0 +1,100 @@
+\documentclass[12 pt]{article}        	%sets the font to 12 pt and says this is an article (as opposed to book or other documents)
+\usepackage{amsfonts, amssymb}					% packages to get the fonts, symbols used in most math
+  
+%\usepackage{setspace}               		% Together with \doublespacing below allows for doublespacing of the document
+
+\oddsidemargin=-0.5cm                 	% These three commands create the margins required for class
+\setlength{\textwidth}{6.5in}         	%
+\addtolength{\voffset}{-20pt}        		%
+\addtolength{\headsep}{25pt}           	%
+
+
+
+\pagestyle{myheadings}                           	% tells LaTeX to allow you to enter information in the heading
+\markright{Andrew Mayo\hfill \today \hfill}  
+																									% and put the proposition number from the book
+                                                	% LaTeX will put your name on the left, the date the paper 
+                                                	% is generated in the middle 
+                                                 	% and a page number on the right
+
+
+
+\newcommand{\eqn}[0]{\begin{array}{rcl}}%begin an aligned equation - allows for aligning = or inequalities.  Always use with $$ $$
+\newcommand{\eqnend}[0]{\end{array} }  	%end the aligned equation
+
+%\doublespacing                         	% Together with the package setspace above allows for doublespacing of the document
+
+\newcommand{\qed}[0]{$\square$}        	% make an unfilled square the default for ending a proof
+
+\begin{document}												% end of preamble and beginning of text that will be printed 
+\textbf{1 (a)}							% the Proposition number from the book (this one is fictitious)
+Prove that $w_0 = \bar{Y} - w_1\bar{X}$: \\ \\
+Let 
+\begin{displaymath}
+  f^\prime(g(w_0))=\frac{\partial L}{\partial \sum_{i=1}^{N}[y^{(i)}-(w_0+w_1x^{(i)})]}
+\end{displaymath}
+\begin{displaymath}
+  g^\prime(w_0)=\frac{\partial \sum_{i=1}^{N}[y^{(i)}-(w_0+w_1x^{(i)})]}{\partial w_0}
+\end{displaymath}
+then
+\begin{displaymath}
+  \frac{\partial L}{\partial w_0} = f^\prime(g(w_0)) \cdot g^\prime(w_0) 
+\end{displaymath}
+\begin{displaymath}
+  f^\prime(g(w_0))=\sum_{i=1}^{N}[y^{(i)}-w_0-w_1 x^{(i)}] = N\bar{Y}-Nw_0-Nw_1\bar{X} 
+\end{displaymath}
+\begin{displaymath}
+  g^\prime(w_0)=\sum_{i=1}^{N}-1=-N
+\end{displaymath}
+\begin{displaymath}
+  \frac{\partial L}{\partial w_0} = -N(N\bar{Y}-Nw_0-Nw_1\bar{X})=-N^2\bar{Y}+N^2w_0+N^2w_1\bar{X}
+\end{displaymath}
+\begin{displaymath}
+  0=-N^2\bar{Y}+N^2w_0+N^2w_1\bar{X}
+\end{displaymath}
+\begin{displaymath}
+  w_0=\bar{Y}-w_1\bar{X} \; \square
+\end{displaymath}  
+
+Prove that 
+\begin{displaymath}
+  w_1 = \frac{\frac{1}{N}\sum_{i=1}^{N}x^{(i)}y^{(i)}-\bar{Y}\bar{X}}{\frac{1}{N}\sum_{i=1}^{N}(x^{(i)})^2-\bar{X}^2}
+\end{displaymath}
+By the chain rule, 
+\begin{displaymath}
+  \frac{\partial L}{\partial w_1} = \sum_{i=1}^{N}[ -x^{(i)} ( y^{(i)} - (w_0 + w_1 x^{(i)}) ) ]
+\end{displaymath}
+Setting the partial derivative to 0, we get
+\begin{displaymath}
+  0 = -\sum_{i=1}^{N}x^{(i)}y^{(i)} + \sum_{i=1}^{N}w_0 x^{(i)} + \sum_{i=1}^{N}[w_1 (x^{(i)})^2]
+\end{displaymath}
+Since $ w_0 = \bar{Y}-w_1\bar{X} $
+\begin{displaymath}
+  0 = -\sum_{i=1}^{N}x^{(i)}y^{(i)} + \sum_{i=1}^{N} [ (\bar{Y}-w_1\bar{X}) x^{(i)} ] + \sum_{i=1}^{N}[w_1 (x^{(i)})^2]
+\end{displaymath}
+\begin{displaymath}
+  = -\sum_{i=1}^{N}x^{(i)}y^{(i)} + \bar{Y} \sum_{i=1}^{N} x^{(i)} - \bar{X} w_1 \sum_{i=1}^{N} x^{(i)} + \sum_{i=1}^{N}[w_1 (x^{(i)})^2]
+\end{displaymath}
+\begin{displaymath}
+  w_1 [ \bar{X} \sum_{i=1}^{N} x^{(i)} - \sum_{i=1}^{N}(x^{(i)})^2 ] 
+  = -\sum_{i=1}^{N}x^{(i)}y^{(i)} + \bar{Y} \sum_{i=1}^{N} x^{(i)} 
+\end{displaymath}
+\begin{displaymath}
+  w_1 = \frac{ -\sum_{i=1}^{N}x^{(i)}y^{(i)} + \bar{Y} \sum_{i=1}^{N} x^{(i)} } 
+  { \bar{X} \sum_{i=1}^{N} x^{(i)} - \sum_{i=1}^{N}(x^{(i)})^2 } 
+\end{displaymath}
+\begin{displaymath}
+  w_1 = \frac{ \sum_{i=1}^{N}x^{(i)}y^{(i)} - N \bar{Y} \bar{X} } 
+  { \sum_{i=1}^{N}(x^{(i)})^2 - N \bar{X}^2 } 
+\end{displaymath}
+\begin{displaymath}
+  w_1 = \frac{ \frac{1}{N} \sum_{i=1}^{N}x^{(i)}y^{(i)} - \bar{Y} \bar{X} } 
+  { \frac{1}{N} \sum_{i=1}^{N}(x^{(i)})^2 - \bar{X}^2 } \; \square
+\end{displaymath}
+
+\textbf{1 (b)}
+Strategy: 
+1 show that because A is symmetric it has an orthogonal set of eigenvectors/is orthogonally diagonizable. 
+2 $ det(A) = \lambda_1 \cdot \lambda_2 \cdot ... \cdot \lambda_d $
+
+\end{document}

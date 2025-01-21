@@ -1,0 +1,192 @@
+\documentclass[12 pt]{article}        	%sets the font to 12 pt and says this is an article (as opposed to book or other documents)
+\usepackage{amsfonts, amssymb}					% packages to get the fonts, symbols used in most math
+  
+%\usepackage{setspace}               		% Together with \doublespacing below allows for doublespacing of the document
+
+\oddsidemargin=-0.5cm                 	% These three commands create the margins required for class
+\setlength{\textwidth}{6.5in}         	%
+\addtolength{\voffset}{-20pt}        		%
+\addtolength{\headsep}{25pt}           	%
+
+
+
+\pagestyle{myheadings}                           	% tells LaTeX to allow you to enter information in the heading
+\markright{Andrew Mayo\hfill \today \hfill}  
+																									% and put the proposition number from the book
+                                                	% LaTeX will put your name on the left, the date the paper 
+                                                	% is generated in the middle 
+                                                 	% and a page number on the right
+
+
+
+\newcommand{\eqn}[0]{\begin{array}{rcl}}%begin an aligned equation - allows for aligning = or inequalities.  Always use with $$ $$
+\newcommand{\eqnend}[0]{\end{array} }  	%end the aligned equation
+
+%\doublespacing                         	% Together with the package setspace above allows for doublespacing of the document
+
+\newcommand{\qed}[0]{$\square$}        	% make an unfilled square the default for ending a proof
+
+\begin{document}												% end of preamble and beginning of text that will be printed 
+\textbf{1 (a)}							% the Proposition number from the book (this one is fictitious)
+Prove that $w_0 = \bar{Y} - w_1\bar{X}$: \\ \\
+Let 
+\begin{displaymath}
+  f^\prime(g(w_0))=\frac{\partial L}{\partial \sum_{i=1}^{N}[y^{(i)}-(w_0+w_1x^{(i)})]}
+\end{displaymath}
+\begin{displaymath}
+  g^\prime(w_0)=\frac{\partial \sum_{i=1}^{N}[y^{(i)}-(w_0+w_1x^{(i)})]}{\partial w_0}
+\end{displaymath}
+then
+\begin{displaymath}
+  \frac{\partial L}{\partial w_0} = f^\prime(g(w_0)) \cdot g^\prime(w_0) 
+\end{displaymath}
+\begin{displaymath}
+  f^\prime(g(w_0))=\sum_{i=1}^{N}[y^{(i)}-w_0-w_1 x^{(i)}] = N\bar{Y}-Nw_0-Nw_1\bar{X} 
+\end{displaymath}
+\begin{displaymath}
+  g^\prime(w_0)=\sum_{i=1}^{N}-1=-N
+\end{displaymath}
+\begin{displaymath}
+  \frac{\partial L}{\partial w_0} = -N(N\bar{Y}-Nw_0-Nw_1\bar{X})=-N^2\bar{Y}+N^2w_0+N^2w_1\bar{X}
+\end{displaymath}
+\begin{displaymath}
+  0=-N^2\bar{Y}+N^2w_0+N^2w_1\bar{X}
+\end{displaymath}
+\begin{displaymath}
+  w_0=\bar{Y}-w_1\bar{X} \; \square
+\end{displaymath}  
+
+Prove that 
+\begin{displaymath}
+  w_1 = \frac{\frac{1}{N}\sum_{i=1}^{N}x^{(i)}y^{(i)}-\bar{Y}\bar{X}}{\frac{1}{N}\sum_{i=1}^{N}(x^{(i)})^2-\bar{X}^2}
+\end{displaymath}
+By the chain rule, 
+\begin{displaymath}
+  \frac{\partial L}{\partial w_1} = \sum_{i=1}^{N}[ -x^{(i)} ( y^{(i)} - (w_0 + w_1 x^{(i)}) ) ]
+\end{displaymath}
+Setting the partial derivative to 0, we get
+\begin{displaymath}
+  0 = -\sum_{i=1}^{N}x^{(i)}y^{(i)} + \sum_{i=1}^{N}w_0 x^{(i)} + \sum_{i=1}^{N}[w_1 (x^{(i)})^2]
+\end{displaymath}
+Since $ w_0 = \bar{Y}-w_1\bar{X} $
+\begin{displaymath}
+  0 = -\sum_{i=1}^{N}x^{(i)}y^{(i)} + \sum_{i=1}^{N} [ (\bar{Y}-w_1\bar{X}) x^{(i)} ] + \sum_{i=1}^{N}[w_1 (x^{(i)})^2]
+\end{displaymath}
+\begin{displaymath}
+  = -\sum_{i=1}^{N}x^{(i)}y^{(i)} + \bar{Y} \sum_{i=1}^{N} x^{(i)} - \bar{X} w_1 \sum_{i=1}^{N} x^{(i)} + \sum_{i=1}^{N}[w_1 (x^{(i)})^2]
+\end{displaymath}
+\begin{displaymath}
+  w_1 [ \bar{X} \sum_{i=1}^{N} x^{(i)} - \sum_{i=1}^{N}(x^{(i)})^2 ] 
+  = -\sum_{i=1}^{N}x^{(i)}y^{(i)} + \bar{Y} \sum_{i=1}^{N} x^{(i)} 
+\end{displaymath}
+\begin{displaymath}
+  w_1 = \frac{ -\sum_{i=1}^{N}x^{(i)}y^{(i)} + \bar{Y} \sum_{i=1}^{N} x^{(i)} } 
+  { \bar{X} \sum_{i=1}^{N} x^{(i)} - \sum_{i=1}^{N}(x^{(i)})^2 } 
+\end{displaymath}
+\begin{displaymath}
+  w_1 = \frac{ \sum_{i=1}^{N}x^{(i)}y^{(i)} - N \bar{Y} \bar{X} } 
+  { \sum_{i=1}^{N}(x^{(i)})^2 - N \bar{X}^2 } 
+\end{displaymath}
+\begin{displaymath}
+  w_1 = \frac{ \frac{1}{N} \sum_{i=1}^{N}x^{(i)}y^{(i)} - \bar{Y} \bar{X} } 
+  { \frac{1}{N} \sum_{i=1}^{N}(x^{(i)})^2 - \bar{X}^2 } \; \square
+\end{displaymath} \\ \\
+
+\textbf{1 (b) i.}
+Let us first show that if $ \lambda_i > 0 $ for all i, then $ A $ must be PD. \\ \\
+For any $ z \neq 0 \in \mathbb{R}^d, z^T A z = z^T (U \Lambda U^T) z $. Let $ y = U^T z $. Then \\
+\begin{displaymath} 
+  z^T A z = y^T \Lambda y = y_1^2 \lambda_1 + y_2^2 \lambda_2 + ... + y_d^2 \lambda_d
+\end{displaymath}
+Since $ U $ is an orthogonal matrix, no row or column of $ U $ can consist entirely of zeros, since each row and column must have a norm of 1. The entries of $ y $ can be written as
+\begin{displaymath}
+  y_1 = u_1^T z, y_2 = u_2^T z, ... , y_d = u_d^T z
+\end{displaymath}
+Since $ z \neq 0 $, then for at least one $ i = \{1, 2, ..., d\} $, $ y_i \neq 0 $. We have assumed that for all i $ \lambda_i > 0 $. In the expression
+\begin{displaymath}
+  y_1^2 \lambda_1 + y_2^2 \lambda_2 + ... + y_d^2 \lambda_d
+\end{displaymath}
+each term will be 0 if $ y_i = 0 $ and greater than 0 if $ y_i \neq 0 $. So 
+\begin{displaymath}
+  z^T A z > 0 \; \square
+\end{displaymath} \\
+Now let us show that if $ A $ is PD then for all i $ \lambda_i > 0 $. \\ 
+We have it that, for all values of i, $ A u_i = \lambda_i u_i $, where $ u_i $ is a column of $ U $. By multiplying both sides of the equation by $ u_i^T $ on the left, we get
+\begin{displaymath}
+  u_i^T A u_i = u_i^T \lambda_i u_i 
+\end{displaymath}
+Because $ A $ is PD and $ u_i \neq 0 \in \mathbb{R}^d $, $ u_i^T A u_i > 0 $. We can write $ u_i^T \lambda_i u_i $ as
+\begin{displaymath}
+  \lambda_i \sum_{j=1}^{d}u_{ji}^2
+\end{displaymath}
+where $ u_{ji} $ is entry of $ U $ at the jth row and ith column. If, for any value of i, $ \lambda_i = 0 $, then  
+\begin{displaymath}
+  \lambda_i \sum_{j=1}^{d}u_{ji}^2 = 0 = u_i^T A u_i 
+\end{displaymath}
+which would contradict $ A $ being PD. 
+Suppose instead that $ \lambda_i < 0 $. 
+For all values of i and j, if $ u_{ji} = 0 $ then $ u_{ji}^2 = 0 $, 
+and if $ u_{ji} \neq 0 $ then $ u_{ji}^2 > 0 $. 
+Since the column vector $ u_i $ is orthonormal, for some value of j, $ u_{ji}^2 > 0 $. In this case,
+\begin{displaymath}
+  \lambda_i \sum_{j=1}^{d}u_{ji}^2 = u_i^T A u_i < 0
+\end{displaymath}
+which would also contradict $ A $ being PD. So it must be the case that if $ A $ is PD then, for all values of i,
+\begin{displaymath}
+  \lambda_i > 0 \; \square
+\end{displaymath} \\ \\
+\textbf{1 (b) ii.} Let us start with the eigenvalues of $ \Phi^T \Phi + \beta I $. \\
+In effect, $ \Phi^T \Phi + \beta I $ differs from $ \Phi^T \Phi $ by having diagonal values shifted by $ \beta $. 
+So if, for $ i = \{1, 2, ..., d\} $, the eigenvalues of $ \Phi^T \Phi $ are $ \lambda_i $, then the eigenvalues of $ \Phi^T \Phi + \beta I $ 
+are $ \lambda_i + \beta $. We can see this in the following way. 
+Let $ A = \Phi^T \Phi $ and $ B = \Phi^T \Phi + \beta I $, and $ \mu_i $ expresses the eigenvalues of $ B $. 
+Let $ M $ be the diagonal matrix $ diag(\mu_i) $. Analogously to $ AU = U \Lambda $,
+\begin{displaymath}
+  BU = U M
+\end{displaymath}
+Since $ B = A + \beta I $,
+\begin{displaymath}
+  (A + \beta I) U = U M
+\end{displaymath}
+\begin{displaymath}
+  AU + \beta U = U M
+\end{displaymath}
+Since $ A U = U \Lambda $,
+\begin{displaymath}
+  U \Lambda + \beta U = U M
+\end{displaymath}
+\begin{displaymath}
+  U \beta = U M - U \Lambda = U (M - \Lambda)
+\end{displaymath}
+\begin{displaymath}
+  \beta = M - \Lambda \; \square
+\end{displaymath}
+Therefore, the difference between the diagonal values of $ M $ and $ \Lambda $ is given by $ \beta $,
+and the eigenvalues of B (that is, $ \Phi^T \Phi + \beta I $) are given by $ \lambda_i + \beta $. \\ \\
+Now let us show that $ A $ and $ B $ have the same eigenvectors. Let $ z $ be an eigenvector of $ B $.
+Since the eigenvalues of $ B $ are given by $ \lambda_i + \beta $, we can write
+\begin{displaymath}
+  Bz = (\lambda_i + \beta) z = \lambda_i z + \beta z
+\end{displaymath}
+\begin{displaymath}
+  A z + \beta I z - \beta I z = \lambda_i z  \\
+\end{displaymath}
+\begin{displaymath}
+  A z = \lambda_i z \; \square
+\end{displaymath}
+By the definition of eigenvectors and eigenvalues, this means that $ z $ is also an eigenvector of A. 
+If $ u_i $ is an eigenvector of $ \Phi^T \Phi $, it is also an eigenvector of $ \Phi^T \Phi + \beta I $. \\ \\
+To see that $ \Phi^T \Phi + \beta I $ is PD if $ \beta > 0 $, 
+we can first show that $ \Phi^T \Phi $ is PSD. In general, for any matrix $ X $, $ X^T X $ is PSD. 
+For any vector $ z \neq 0 \in \mathbb{R}^d $, 
+\begin{displaymath}
+  z^T (X^T X) z = (X z)^T X z = || X z ||_2^2 \geq 0
+\end{displaymath}
+From the proof in \textbf{1 (b) i.} we can see that for a PSD matrix, for all values of i, $ \lambda_i \geq 0 $. In this case, if $ \beta > 0 $,
+\begin{displaymath}
+  \lambda_i + \beta > 0 \; \square
+\end{displaymath}
+As we have seen, if all the eigenvalues of $ \Phi^T \Phi + \beta I $ are positive, then $ \Phi^T \Phi + \beta I $ is PD. \\ \\
+\textbf{1 (c)}
+
+\end{document}
