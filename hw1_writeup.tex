@@ -187,6 +187,50 @@ From the proof in \textbf{1 (b) i.} we can see that for a PSD matrix, for all va
   \lambda_i + \beta > 0 \; \square
 \end{displaymath}
 As we have seen, if all the eigenvalues of $ \Phi^T \Phi + \beta I $ are positive, then $ \Phi^T \Phi + \beta I $ is PD. \\ \\
-\textbf{1 (c)}
-
+\textbf{1 (c)} We can write $ \sum_{n=1}^{N} log P(y^{(n)} | x^{(n)}) $ as
+\begin{displaymath}
+  \mathbb{I}(y^{(n)} = 1) log P(y^{n} = 1 | x^{(n)}) + \mathbb{I}(y^{(n)} = -1) log P(y^{(n)} = -1 | x^{(n)})
+\end{displaymath}
+For the probabilities of the class labels \{-1, 1\}, 
+we can use the standard sigmoid function for logistic regression $ \sigma(w^T x) $,
+and then set the partial derivative $ f^{\prime}(w) $ to 0,
+switching the expression's sign to make it a convex optimization problem:
+\begin{displaymath}
+  0 = - \sum_{n=1}^{N} \{ 
+  \mathbb{I} (y^{(n)} = 1) 
+  \frac{1}{\sigma [w^T \phi(x^{(n)})]} \sigma [w^T \phi(x^{(n)})] 
+  [1 - \sigma (w^T \phi(x^{(n)}))] 
+  \phi(x^{(n)})
+\end{displaymath}
+\begin{displaymath}
+  +\ \mathbb{I} (y^{(n)} = -1) 
+  \frac{1} {1 - \sigma [w^T \phi (x^{(n)})]}
+  [- \sigma (w^T \phi(x^{(n)}))]
+  [1 - \sigma (w^T \phi(x^{(n)}))]
+  \phi(x^{(n)})
+  \}
+\end{displaymath}
+\begin{displaymath}
+  0 = - \sum_{n=1}^{N} \{ 
+  \mathbb{I} (y^{(n)} = 1) 
+  [1 - \sigma (w^T \phi(x^{(n)}))] 
+  \phi(x^{(n)})
+\end{displaymath}
+\begin{displaymath}
+  +\ \mathbb{I} (y^{(n)} = -1) 
+  [- \sigma (w^T \phi(x^{(n)}))]
+  \phi(x^{(n)})
+  \}
+\end{displaymath}
+By setting the partial derivative of expression (4) with respect to $ w $ to 0 we get
+\begin{displaymath}
+  0 = \sum_{n=1}^N{} \{
+  \sigma [yw^T \phi(x^{(n)})] exp \{ -yw^T \phi(x^{(n)}) \} (-y) \phi(x^{(n)})
+  \}
+\end{displaymath}
+\begin{displaymath}
+  0 = - \sum_{n=1}^N{} \{
+  \sigma [yw^T \phi(x^{(n)})] exp \{ -yw^T \phi(x^{(n)}) \} y \phi(x^{(n)})
+  \}
+\end{displaymath}
 \end{document}
