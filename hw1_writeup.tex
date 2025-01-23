@@ -189,21 +189,27 @@ From the proof in \textbf{1 (b) i.} we can see that for a PSD matrix, for all va
 As we have seen, if all the eigenvalues of $ \Phi^T \Phi + \beta I $ are positive, then $ \Phi^T \Phi + \beta I $ is PD. \\ \\
 \textbf{1 (c)} We can write $ \sum_{n=1}^{N} log P(y^{(n)} | x^{(n)}) $ as
 \begin{displaymath}
-  \mathbb{I}(y^{(n)} = 1) log P(y^{n} = 1 | x^{(n)}) + \mathbb{I}(y^{(n)} = -1) log P(y^{(n)} = -1 | x^{(n)})
+  \sum_{n=1}^{N} \{ \mathbb{I}(y^{(n)} = 1) log P(y^{n} = 1 | x^{(n)}) + \mathbb{I}(y^{(n)} = -1) log P(y^{(n)} = -1 | x^{(n)}) \}
 \end{displaymath}
 For the probabilities of the class labels \{-1, 1\}, 
-we can use the standard sigmoid function for logistic regression $ \sigma(w^T x) $,
+we can use the standard sigmoid function for logistic regression $ \sigma(w^T x) $
+and treat y as $ y \in \{0, 1\} $:
+\begin{displaymath}
+  \sum_{n=1}^{N} \{
+    y^{(n)} log [ \sigma (w^T \phi(x^{(n)}))] + (1 - y^{(n)}) log [1 - \sigma (w^T \phi (x^{(n)}))]^{1 - y^{(n)}} 
+  \}
+\end{displaymath}
 and then set the partial derivative $ f^{\prime}(w) $ to 0,
 switching the expression's sign to make it a convex optimization problem:
 \begin{displaymath}
   0 = - \sum_{n=1}^{N} \{ 
-  \mathbb{I} (y^{(n)} = 1) 
+  y^{(n)} 
   \frac{1}{\sigma [w^T \phi(x^{(n)})]} \sigma [w^T \phi(x^{(n)})] 
   [1 - \sigma (w^T \phi(x^{(n)}))] 
   \phi(x^{(n)})
 \end{displaymath}
 \begin{displaymath}
-  +\ \mathbb{I} (y^{(n)} = -1) 
+  + \: (1 - y^{(n)})
   \frac{1} {1 - \sigma [w^T \phi (x^{(n)})]}
   [- \sigma (w^T \phi(x^{(n)}))]
   [1 - \sigma (w^T \phi(x^{(n)}))]
@@ -212,25 +218,67 @@ switching the expression's sign to make it a convex optimization problem:
 \end{displaymath}
 \begin{displaymath}
   0 = - \sum_{n=1}^{N} \{ 
-  \mathbb{I} (y^{(n)} = 1) 
-  [1 - \sigma (w^T \phi(x^{(n)}))] 
+    y^{(n)} [1 - \sigma (w^T \phi(x^{(n)}))] 
   \phi(x^{(n)})
 \end{displaymath}
 \begin{displaymath}
-  +\ \mathbb{I} (y^{(n)} = -1) 
-  [- \sigma (w^T \phi(x^{(n)}))]
+  - \: (1 - y^{(n)})
+  [ \sigma (w^T \phi(x^{(n)}))]
   \phi(x^{(n)})
+  \}
+\end{displaymath}
+\begin{displaymath}
+  0 = - \sum_{n=1}^{N} \{
+    [ y^{(n)} - \sigma (w^T \phi(x^{(n)})) ] \phi(x^{(n)})
   \}
 \end{displaymath}
 By setting the partial derivative of expression (4) with respect to $ w $ to 0 we get
 \begin{displaymath}
-  0 = \sum_{n=1}^N{} \{
-  \sigma [yw^T \phi(x^{(n)})] exp \{ -yw^T \phi(x^{(n)}) \} (-y) \phi(x^{(n)})
+  0 = - \sum_{n=1}^N{} \{
+    \frac{exp [ -yw^T \phi(x^{(n)}) ]} {1 + exp[-yw^T \phi(x^{(n)})]} y \phi(x^{(n)})
   \}
 \end{displaymath}
 \begin{displaymath}
-  0 = - \sum_{n=1}^N{} \{
-  \sigma [yw^T \phi(x^{(n)})] exp \{ -yw^T \phi(x^{(n)}) \} y \phi(x^{(n)})
+0 = - \sum_{n=1}^N{} \{
+  \frac{1} {exp[yw^T \phi(x^{(n)})] + 1} y \phi(x^{(n)})
   \}
 \end{displaymath}
+If the derivative equation for the negative log likelihood above has $ y = 0 $, 
+then the equation becomes
+\begin{displaymath}
+  0 = - \sum_{n=1}^{N} \{
+    [ - \sigma (w^T \phi(x^{(n)})) ] \phi(x^{(n)})
+  \}
+\end{displaymath}
+which is also what we get from the partial derivative equation for the loss function we derived from (4) 
+if $ y = -1 $. So maximizing the partial derivative of the log-likelihood function with respect to $ w $ 
+is equivalent to minimizing the partial derivative of loss function (4) with respect to $ w $
+when $ y = -1 $. If $ y = 1 $, then the derivative equation for the negative log likelihood becomes
+\begin{displaymath}
+  0 = - \sum_{n=1}^{N} \{
+    [ 1 - \sigma (w^T \phi(x^{(n)})) ] \phi(x^{(n)})
+  \}
+\end{displaymath}
+Since $ 1 - \sigma(w^T \phi(x^{(n)})) = \frac{ exp [ - w^T \phi(x^{(n)})) ] } { 1 + exp[ - w^T \phi(x^{(n)})) ] }  $
+\begin{displaymath}
+0 = - \sum_{n=1}^{N} \{
+    \frac{ exp [ - w^T \phi(x^{(n)})) ] } { 1 + exp[ - w^T \phi(x^{(n)})) ] } 
+    \phi(x^{(n)})
+  \}
+\end{displaymath}
+We can use the same expression the partial derivative equation for the loss function in the same way 
+if $ y = 1 $: 
+\begin{displaymath}
+  0 = - \sum_{n=1}^{N} \{
+    \frac{1} {exp [w^T \phi(x^{(n)})] + 1 } \phi(x^{(n)}) 
+  \}
+  =
+  - \sum_{n=1}^{N} \{
+    \frac{ exp [ - w^T \phi(x^{(n)})) ] } { 1 + exp[ - w^T \phi(x^{(n)})) ] } 
+    \phi(x^{(n)})
+  \}
+\end{displaymath}
+Thefore, since w has the same value at the maximum of the log-likelihood function 
+and the minimum of loss function (4) for all values of $ y $, maximizing the log-likelihood 
+is equivalent to minimizing this loss function.
 \end{document}
