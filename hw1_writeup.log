@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.1.18)  23 JAN 2025 20:08
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.1.18)  24 JAN 2025 03:20
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -196,21 +196,80 @@ File: gd_vs_sgd.png Graphic file (type png)
 Package pdftex.def Info: gd_vs_sgd.png  used on input line 289.
 (pdftex.def)             Requested size: 469.75499pt x 234.88023pt.
 
+Underfull \hbox (badness 10000) in paragraph at lines 292--299
 
-[6 <./gd_vs_sgd.png>] (./hw1_writeup.aux)
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 292--299
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 292--299
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 292--299
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 292--299
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 292--299
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 292--299
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 292--299
+
+ []
+
+<rms_model_size.png, id=33, 722.7pt x 361.35pt>
+File: rms_model_size.png Graphic file (type png)
+<use rms_model_size.png>
+Package pdftex.def Info: rms_model_size.png  used on input line 303.
+(pdftex.def)             Requested size: 361.3491pt x 180.67456pt.
+
+
+[6 <./gd_vs_sgd.png>]
+
+[7 <./rms_model_size.png>]
+File: rms_model_size.png Graphic file (type png)
+<use rms_model_size.png>
+Package pdftex.def Info: rms_model_size.png  used on input line 318.
+(pdftex.def)             Requested size: 361.3491pt x 180.67456pt.
+<rms_lambda_value.png, id=43, 722.7pt x 361.35pt>
+File: rms_lambda_value.png Graphic file (type png)
+<use rms_lambda_value.png>
+Package pdftex.def Info: rms_lambda_value.png  used on input line 321.
+(pdftex.def)             Requested size: 361.3491pt x 180.67456pt.
+
+
+[8 <./rms_lambda_value.png>] (./hw1_writeup.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 1
 L3 programming layer <2024-12-25>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 1857 strings out of 473207
- 27883 string characters out of 5716288
+ 1871 strings out of 473207
+ 28245 string characters out of 5716288
  420195 words of memory out of 5000000
- 25118 multiletter control sequences out of 15000+600000
+ 25132 multiletter control sequences out of 15000+600000
  564141 words of font info for 56 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 57i,6n,65p,231b,220s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 57i,7n,65p,231b,220s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
 ></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb>
 </usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><
@@ -224,10 +283,10 @@ xlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/tex
 live/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texli
 ve/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/t
 exlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on hw1_writeup.pdf (6 pages, 178401 bytes).
+Output written on hw1_writeup.pdf (8 pages, 256400 bytes).
 PDF statistics:
- 91 PDF objects out of 1000 (max. 8388607)
- 54 compressed objects within 1 object stream
+ 103 PDF objects out of 1000 (max. 8388607)
+ 60 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 6 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 16 words of extra memory for PDF output out of 10000 (max. 10000000)
 

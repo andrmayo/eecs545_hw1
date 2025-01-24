@@ -178,7 +178,9 @@ def closed_form(
     # Your final outcome needs to be passed to w.
     # Note that both 2.(c) and 2.(e) call this function, but with different 'reg'.
     ###################################################################
-    raise NotImplementedError("TODO: Add your implementation here.")
+    # w = (XTX)^-1 XT Y 
+    w = np.linalg.inv(X_train.T @ X_train + reg*np.identity(X_train.shape[1], dtype=X_train.dtype)) @ X_train.T @ y_train
+
     ###################################################################
     #                        END OF YOUR CODE                         #
     ###################################################################
@@ -215,7 +217,9 @@ def compute_rms_for_m(x_train, y_train, x_test, y_test,
     # You may want to see the previous cells.
     # Note that both 2.(d) and 2.(f) call this function, but with different 'reg'.
     #########################################################################
-    raise NotImplementedError("TODO: Add your implementation here.")
+    X_train_m = generate_polynomial_features(x_train, degree+1)
+    X_test_m = generate_polynomial_features(x_test, degree+1)
+    w_m = closed_form(X_train_m, y_train, reg=reg)
     #########################################################################
     #                          END OF YOUR CODE                             #
     #########################################################################

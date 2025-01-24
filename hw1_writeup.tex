@@ -267,7 +267,7 @@ Since $ 1 - \sigma(w^T \phi(x^{(n)})) = \frac{ exp [ - w^T \phi(x^{(n)})) ] } { 
     \phi(x^{(n)})
   \}
 \end{displaymath}
-We can use the same expression the partial derivative equation for the loss function in the same way 
+We can use the same expression for the partial derivative equation for the loss function in the same way 
 if $ y = 1 $: 
 \begin{displaymath}
   0 = - \sum_{n=1}^{N} \{
@@ -295,5 +295,38 @@ SGD updates weights more frequently than GD. Hence it is not surprising
 that more frequent computation made SGD take longer. 
 In this case, it also seems that the more frequent updates to the weights with SGD 
 allowed SGD to minimize the loss on the training set more effectively over a set number
-of epochs. 
+of epochs. \\ \\ \\ \\ \\ \\ \\ \\
+
+\textbf{2.2 (b)}
+
+\begin{figure}[h!]
+  \includegraphics[scale=0.5]{rms_model_size.png}
+\end{figure}
+
+\textbf{2.2 (c)}
+In the plot in \textbf{2.2 (b)} we see a clear divergance in model performance in the training set vs. the test set at $ M = 8 $, 
+that is, with a polynomial of degree 7. For a polynomial of degree 8, it is clearly the case that model performance
+on the test set has worsened. I would say that the model with $ M = 6 $, that is, the polynomial of degree 5, 
+best fits the data (inclusive of the test set), since we see no improvement in performance
+for $ M > 6 $. 
+There is clear evidence of overfitting, since in the plot we can see a divergence between training set and test set performance:
+the fact that training set performance is still improving while test set performance worsens tells us that the model has overfit the training data.
+
+\newpage \textbf{2.3 (b)}
+
+\begin{figure}[h!]
+    \includegraphics[scale=0.5]{rms_model_size.png}
+\end{figure}
+\begin{figure}[h!]
+    \includegraphics[scale=0.5]{rms_lambda_value.png}
+\end{figure}
+
+\textbf{2.3 (c)}
+  We see a clear improvement in performance on the test set when we move from $ \lambda = 0 $ (i.e. regression without regularization) 
+  to $ \lambda = 0.00001 $, and a slight improve in performance with $ \lambda = 0.0001 $, which seems to be the best value of $ \lambda $ 
+  for a ninth degree polynomial.
+  We can see this in the way the plot for evaluation on the test set bottoms out at $ \lambda = 0.0001 $. The fact that introducing regularization
+  improves performance on the test set but worsens performance on the training set suggests some amount of overfitting.
+
 \end{document}
+
