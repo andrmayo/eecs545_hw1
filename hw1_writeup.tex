@@ -1,5 +1,6 @@
 \documentclass[12 pt]{article}        	%sets the font to 12 pt and says this is an article (as opposed to book or other documents)
 \usepackage{amsfonts, amssymb}					% packages to get the fonts, symbols used in most math
+\usepackage{graphicx}
   
 %\usepackage{setspace}               		% Together with \doublespacing below allows for doublespacing of the document
 
@@ -278,7 +279,21 @@ if $ y = 1 $:
     \phi(x^{(n)})
   \}
 \end{displaymath}
-Thefore, since w has the same value at the maximum of the log-likelihood function 
+Thefore, since $ w $ has the same value at the maximum of the log-likelihood function 
 and the minimum of loss function (4) for all values of $ y $, maximizing the log-likelihood 
-is equivalent to minimizing this loss function.
+is equivalent to minimizing this loss function. \\ \\
+
+\textbf{2.1 (b)} 
+
+\begin{figure}[h!]
+  \includegraphics[width=\linewidth]{gd_vs_sgd.png}
+\end{figure}
+
+GD took less time (0.00 seconds as opposed to 0.03 seconds for SGD, as measured by the time module)
+but SGD showed a lower test objective (2.6796 for SGD vs. 2.7017 for GD). 
+SGD updates weights more frequently than GD. Hence it is not surprising
+that more frequent computation made SGD take longer. 
+In this case, it also seems that the more frequent updates to the weights with SGD 
+allowed SGD to minimize the loss on the training set more effectively over a set number
+of epochs. 
 \end{document}

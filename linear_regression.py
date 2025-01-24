@@ -50,7 +50,7 @@ def compute_objective(X: np.ndarray, y: np.ndarray, w: np.ndarray) -> float:
     # You need to pass the output to the 'objective' variable
     # (i.e., objective = the_final_value_from_your_end )
     ###################################################################
-    raise NotImplementedError("TODO: Add your implementation here.")
+    objective = np.sum((X @ w - y)**2) / 2
     ###################################################################
     #                        END OF YOUR CODE                         #
     ###################################################################
@@ -82,7 +82,8 @@ def batch_gradient_descent(
     N = X_train.shape[0]
     M = X_train.shape[1]
     w = np.zeros(M, dtype=y_train.dtype)
-    
+    grad = np.zeros(M, dtype=y_train.dtype)
+
     train_objective_list = []
     convergence_iters = []
     for current_epoch_number in range(max_epochs):
@@ -91,7 +92,7 @@ def batch_gradient_descent(
         # In this block, you have X_train and y_train. 
         # From those train set data, you are required to update the weight 'w' 
         ###################################################################
-        raise NotImplementedError("TODO: Add your implementation here.")
+        w -= eta*np.sum(((X_train @ w - y_train) * X_train.T), axis=1)
         ###################################################################
         #                        END OF YOUR CODE                         #
         ###################################################################
@@ -138,7 +139,7 @@ def stochastic_gradient_descent(
             # In this block, you are required to update w from a single 
             # (x_data_point, y_data_point).
             ###################################################################
-            raise NotImplementedError("TODO: Add your implementation here.")
+            w -= eta*((x_data_point @ w - y_data_point) * x_data_point)
             ###################################################################
             #                        END OF YOUR CODE                         #
             ###################################################################
