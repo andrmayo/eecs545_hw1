@@ -328,5 +328,16 @@ the fact that training set performance is still improving while test set perform
   We can see this in the way the plot for evaluation on the test set bottoms out at $ \lambda = 0.0001 $. The fact that introducing regularization
   improves performance on the test set but worsens performance on the training set suggests some amount of overfitting.
 
+\textbf{3 (a)} We can write $ E_D(w) = \frac{1}{2} \sum_{i=1}^{N} r^{(i)}(w^T x^{(i)} - y^{(i)})^2 $ as 
+\begin{displaymath}
+  \sum_{i=1}^{N} frac{r^{(i)}}{2} (w^T x^{(i)} - y^{(i)})^2  
+\end{displaymath}
+Let $ R = diag(\frac{r^{(i)}}{2}) \in \mathbb{R}^{N \times N}. Now, if we can express this in matrix notation:
+{\begin{displaymath}
+  (w^T X - y^T) R (w^T X - y^T)^T \; \square  
+\end{displaymath}
+}
+
+
 \end{document}
 
