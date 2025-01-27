@@ -254,7 +254,9 @@ def closed_form_locally_weighted(
     ###################################################################
     # TODO: Implement the closed form solution.
     ###################################################################
-    raise NotImplementedError("TODO: Add your implementation here.")
+    # (XT RX)^-1 XT R y
+    R = np.diag(r_train) 
+    w = np.linalg.inv(X_train.T @ R @ X_train) @ X_train.T @ R @ y_train
     ###################################################################
     #                        END OF YOUR CODE                         #
     ###################################################################
@@ -283,14 +285,32 @@ def compute_y_space(
         locally weighted linear regression y_space values of shape (K, ). Each item in this list are matched with x_space of the same index position.
     """
     y_space = np.zeros_like(x_space)
-    for idx, x_point in enumerate(x_space):
         #########################################################################
         # TODO: Compute y_space value matched to each x_space item.             #
         # You first need to compute r for the x_point, and then compute w for r.#
         # And then, you can compute y_space (y_space[idx]) for the x_point with #
         # w value from the previous step.                                       #
         #########################################################################
-        raise NotImplementedError("TODO: Add your implementation here.")
+    r = np.exp(
+        np.array(
+            [
+                [
+                    -((x_space[k] - x_train[i])**2)/(2*tau**2)
+                    for i in range(x_train.shape[0])
+                ]
+            for k in range(x_space.shape[0])
+            ]
+        )
+    )
+    W = np.array(
+        [
+            closed_form_locally_weighted(X_train, y_train, r_train=r[k])
+            for k in range(x_space.shape[0])
+        ]
+    )
+    X_space = generate_polynomial_features(x_space, M=2)
+    #y_space = np.sum(X_space * W, axis = 1)
+    y_space = np.einsum("ij, ij->i", X_space, W)
         #########################################################################
         #                          END OF YOUR CODE                             #
         #########################################################################

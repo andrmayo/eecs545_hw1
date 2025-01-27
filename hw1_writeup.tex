@@ -330,14 +330,94 @@ the fact that training set performance is still improving while test set perform
 
 \textbf{3 (a)} We can write $ E_D(w) = \frac{1}{2} \sum_{i=1}^{N} r^{(i)}(w^T x^{(i)} - y^{(i)})^2 $ as 
 \begin{displaymath}
-  \sum_{i=1}^{N} frac{r^{(i)}}{2} (w^T x^{(i)} - y^{(i)})^2  
+  \sum_{i=1}^{N} \frac{r^{(i)}}{2} (w^T x^{(i)} - y^{(i)})^2  
 \end{displaymath}
-Let $ R = diag(\frac{r^{(i)}}{2}) \in \mathbb{R}^{N \times N}. Now, if we can express this in matrix notation:
+Let $ R = diag(\frac{r^{(i)}}{2}) \in \mathbb{R}^{N \times N} $. Now, we can express this in matrix notation:
 {\begin{displaymath}
   (w^T X - y^T) R (w^T X - y^T)^T \; \square  
 \end{displaymath}
 }
 
+\textbf{3 (b)}
+\begin{displaymath}
+  (w^T X - y^T) R (w^T X - y^T)^T 
+\end{displaymath}
+\begin{displaymath}
+  = [R^{\frac{1}{2}} (w^T X - y^T)^T]^T R^{\frac{1}{2}} (w^T X - y^T)^T 
+\end{displaymath}
+\begin{displaymath}
+  = ( R^{\frac{1}{2}} X^T w - R^{\frac{1}{2}} y )^T ( R^{\frac{1}{2}} X^T w - R^{\frac{1}{2}} y )
+\end{displaymath}
+\begin{displaymath}
+  = ( R^{\frac{1}{2}} X^T w )^T (R^{\frac{1}{2}} X^T w )
+  - ( R^{\frac{1}{2}} X^T w )^T ( R^{\frac{1}{2}} y )
+  - ( R^{\frac{1}{2}} y )^T ( R^{\frac{1}{2}} X^T w )
+  + (R^{\frac{1}{2}} y )^T ( R^{\frac{1}{2}} y )
+\end{displaymath}
+\begin{displaymath}
+  = w^T X R^{\frac{1}{2}} R^{\frac{1}{2}} X^T w 
+  - w^T X R^{\frac{1}{2}} R^{\frac{1}{2}} y 
+  - y^T R^{\frac{1}{2}} R^{\frac{1}{2}} X^T w
+  + y^T R^{\frac{1}{2}} R^{\frac{1}{2}} y
+\end{displaymath}
+\begin{displaymath}
+  = w^T X R X^T w 
+  - w^T X R y 
+  - y^T R X^T w
+  + y^T R y
+\end{displaymath}
+\begin{displaymath}
+  \nabla_w (E_D (w)) = 0 = 2 X R X^T w 
+  - 2 X R y
+\end{displaymath}
+\begin{displaymath}
+  X R X^T w = X R y
+\end{displaymath}
+\begin{displaymath}
+  w = (X R X^T)^{-1} X R y
+\end{displaymath}
 
+\textbf{3 (c)} Let $ r^{(i)} = \frac{1}{(\sigma^{(i)})^2} $. Then
+\begin{displaymath}
+  p(y^{(i)} | x^{(i)}; w) = \frac{\sqrt{r^{(i)}}}{\sqrt{2\pi}} exp[ -\frac{1}{2}r^{(i)} (y^{(i)} - w^T x^{(i)})^2 ]
+\end{displaymath}
+We can take the log-likelihood for the MLE. 
+Since taking the logarithm gives us a monotically increasing function, the parameter values that maximize the log-likelihood 
+will also maximize the likelihood function.
+\begin{displaymath}
+  \arg \max_{w} log(\frac{\sqrt{r^{(i)}}}{\sqrt{2 \pi}}) - \frac{r^{(i)}}{2} (y^{(i)} - w^T x^{(i)})^2
+\end{displaymath}
+\begin{displaymath}
+  = log(\frac{\sqrt{r^{(i)}}}{\sqrt{2 \pi}}) 
+  - \frac{r^{(i)}}{2} (y^{(i)})^2
+  + r^{(i)} y^{(i)} w^T x^{(i)}
+  - \frac{r^{(i)}}{2} w^T x^{(i)} (x^{(i)})^T w
+\end{displaymath}
+\begin{displaymath}
+  \frac{\partial}{\partial w} MLE_i = 0 = 
+  r^{(i)} y^{(i)} x^{(i)}
+  - r^{(i)} x^{(i)} (x^{(i)})^T w
+\end{displaymath}
+\begin{displaymath} 
+  x^{(i)} r^{(i)} (x^{(i)})^T w =
+  x^{(i)} r^{(i)} y^{(i)} 
+\end{displaymath}
+\begin{displaymath} 
+  w = (x^{(i)} r^{(i)} (x^{(i)})^T)^{-1} x^{(i)} r^{(i)} y^{(i)} 
+\end{displaymath}
+Let $ R = diag(\frac{1}{(\sigma^{(i)})^2}) $. 
+We can write the above in matrix form for $ i = 1, ..., N $ as 
+\begin{displaymath}
+  w = (X R X^T)^{-1} XRy \; \square
+\end{displaymath}
+which is the solution to a weighted linear regression problem.
+\newpage \textbf{3 (d)}
+\begin{figure}[h!]
+  \includegraphics[width=\linewidth]{locally_weighted_lr.png}
+\end{figure} \\
+Having a $ \tau $ value that is too small or too large seems to correspond to overfitting and underfitting. We can see in the plot above 
+that with $ \tau = 0.1 $ changes in the prediction function are discontinuous and seem often to be pulled to fit specific points exactly,
+which is a sign of overfitting. With $ \tau = 10 $, on the other hand, the model seems to have underfit: it mostly misses 
+the important non-linearities in the data, and is only a slight improvement over the OLS model.
 \end{document}
 
